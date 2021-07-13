@@ -1,0 +1,1 @@
+(self.webpackChunkionicPwa=self.webpackChunkionicPwa||[]).push([[2622],{2622:(a,e,t)=>{"use strict";t.r(e),t.d(e,{ShareWeb:()=>r});var i=t(5310);class r extends i.Uw{async share(a){if("undefined"==typeof navigator||!navigator.share)throw this.unavailable("Share API not available in this browser");return await navigator.share({title:a.title,text:a.text,url:a.url}),{}}}}}]);
