@@ -4,6 +4,8 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Geolocation, Position } from '@capacitor/geolocation';
 import { Share } from '@capacitor/share';
 
+import { Device, DeviceId } from '@capacitor/device';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -13,6 +15,7 @@ export class HomePage {
 
   myImage = null;
   position: Position = null;
+  deviceID: DeviceId = null;
 
 
   constructor() {}
@@ -34,13 +37,19 @@ export class HomePage {
     this.position = coordinates;
   }
 
+  async getDeviceID() {
+    const devID = await Device.getId();
+
+    this.deviceID = devID;
+  }
+
+
   async share() {
     await Share.share({
       title: 'Come and find me',
-      text: `Here's my current location:
-        ${this.position.coords.latitude},
-        ${this.position.coords.longitude}`,
-      url: 'http://ionicacademy.com/'
+      text: `Here's my device ID:
+        ${this.deviceID.uuid}`,
+      url: 'http://thingsintouch.com/'
     });
   }
 
