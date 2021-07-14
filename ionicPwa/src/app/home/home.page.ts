@@ -32,13 +32,24 @@ export class HomePage implements OnInit {
   ngOnInit() {
     console.log('ng on Init - home.page.ts');
     this.getStatusDevice();
-    console.log('nfc enabled: ', this.message);
+    console.log('nfc enabled: '+ this.message);
   }
 
   async getStatusDevice() {
     await this.platform.ready();
     //this.message = await this.nfc.enabled()
-    this.message = await this.nfc.showSettings();
+    await this.nfc.showSettings().
+      then(
+        (result) => {
+          this.message = result;
+          console.log('nfc show settings: '+ result);
+        },
+        (err) => {
+          // Handle error
+          this.message = 'error: '+ err;
+          console.log("nfc show settings error: " + err);
+        }
+      );
   }
 
   async takePicture() {
