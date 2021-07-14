@@ -37,8 +37,8 @@ export class HomePage implements OnInit {
 
   async getStatusDevice() {
     await this.platform.ready();
-    this.message = await this.nfc.enabled()
-    //this.nfc.showSettings
+    //this.message = await this.nfc.enabled()
+    this.message = await this.nfc.showSettings();
   }
 
   async takePicture() {
