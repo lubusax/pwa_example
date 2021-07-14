@@ -7,6 +7,7 @@ import { Share } from '@capacitor/share';
 import { Device, DeviceId } from '@capacitor/device';
 
 import { NFC, Ndef } from '@ionic-native/nfc/ngx';
+import { Platform } from '@ionic/angular';
 
 
 @Component({
@@ -19,11 +20,14 @@ export class HomePage implements OnInit {
   myImage = null;
   position: Position = null;
   deviceID: DeviceId = null;
-  message: string = null;
+  message: string = "not defined";
   nfcEnabled: boolean = false;
 
 
-  constructor(private nfc: NFC, private ndef: Ndef) { }
+  constructor(
+    public platform: Platform,
+    private nfc: NFC,
+    private ndef: Ndef) { }
 
   ngOnInit() {
     console.log('ng on Init - home.page.ts');
@@ -32,7 +36,9 @@ export class HomePage implements OnInit {
   }
 
   async getStatusDevice() {
-    this.nfcEnabled = await this.nfc.enabled()
+    await this.platform.ready();
+    this.message = await this.nfc.enabled()
+    //this.nfc.showSettings
   }
 
   async takePicture() {
