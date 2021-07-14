@@ -19,12 +19,20 @@ export class HomePage implements OnInit {
   myImage = null;
   position: Position = null;
   deviceID: DeviceId = null;
+  message: string = null;
+  nfcEnabled: boolean = false;
 
 
   constructor(private nfc: NFC, private ndef: Ndef) { }
 
   ngOnInit() {
     console.log('ng on Init - home.page.ts');
+    this.getStatusDevice();
+    console.log('nfc enabled: ', this.nfcEnabled);
+  }
+
+  async getStatusDevice() {
+    this.nfcEnabled = await this.nfc.enabled()
   }
 
   async takePicture() {
