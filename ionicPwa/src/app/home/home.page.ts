@@ -20,8 +20,8 @@ export class HomePage implements OnInit {
   myImage = null;
   position: Position = null;
   deviceID: DeviceId = null;
-  message: string = "not defined";
-  nfcEnabled: boolean = false;
+  message: any = null;
+  //nfcEnabled: any = null;
 
 
   constructor(
